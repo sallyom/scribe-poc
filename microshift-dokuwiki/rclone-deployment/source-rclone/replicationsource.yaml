@@ -1,0 +1,16 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: dokuwiki-source
+  namespace: dokuwiki
+spec:
+  sourcePVC: dokuwiki-pvc
+  trigger:
+    schedule: "*/3 * * * *"
+  rclone:
+    rcloneConfigSection: "aws-s3-bucket"
+    rcloneDestPath: "sodokuwiki-ex"
+    rcloneConfig: "rclone-secret"
+    copyMethod: Clone
+    volumeSnapshotClassName: csi-hostpath-snapclass
